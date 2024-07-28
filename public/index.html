@@ -1,0 +1,632 @@
+<html>
+
+<head>
+  <title>
+    index
+  </title>
+  <style>
+    .btnbtn {
+
+      float: right;
+      margin-right: 15px;
+      transition: ease all 1s;
+    }
+
+    #logo {
+
+      height: 70px;
+      width: 70px;
+      background-size: contain;
+      margin-top: 5px;
+      /* logo takes margin from outer div */
+      float: left;
+      margin-left: 10px;
+      border-radius: 30%;
+
+    }
+
+    .text {
+      margin-top: 10px;
+      float: left;
+      margin-left: 20px;
+      font-size: 30px;
+      color: #BD3F23;
+      text-shadow: -7px 5px 2px #DD7F6A;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    }
+
+    .heading {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    }
+
+    #body {
+      background-color: #EF8F7A
+    }
+
+    .content {
+
+      color: #BD3F23;
+    }
+
+    .modal-header {
+      background-color: #C2705F;
+      color: white;
+    }
+
+    .btn-primary,
+    .btn-primary:hover,
+    .btn-primary:active,
+    .btn-primary:visited {
+      background-color: #C2705F !important;
+    }
+
+    .content2 {
+
+      color: #BD3F23 !important;
+      font-weight: bolder;
+
+    }
+  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+
+  <script>
+    $(document).ready(function () {
+
+      $("#txtEmail").blur(function () {
+        var email = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+        let mail = $(this).val();
+
+        if (email.test(mail) == true)
+          $("#spanmail").html("valid");
+
+        else
+          $("#spanmail").html("fill valid email address");
+
+      });
+
+      $("#txtPwd").keydown(function () {
+        var password = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/;
+        let pwd = $(this).val();
+
+        if (password.test(pwd) == true)
+          $("#spanpass").html("valid");
+
+        else
+          $("#spanpass").html("set a strong password");
+
+      });
+
+      $("#txtEmaiil").blur(function () {
+        var email = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+        let mail = $(this).val();
+
+        if (email.test(mail) == true)
+          $("#spanmaiil").html("valid");
+
+        else
+          $("#spanmaiil").html("fill valid email address");
+
+      });
+
+      $("#txtPwwd").keydown(function () {
+        var password = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/;
+        let pwd = $(this).val();
+
+        if (password.test(pwd) == true)
+          $("#spanpaass").html("valid");
+
+        else
+          $("#spanpaass").html("set a strong password");
+
+      });
+
+      $("#btnsignup").click(function () {
+        // alert();
+        let ConfiObj = {
+          type: "get",
+          url: "/signup-process",
+          data: {
+            txtEmail: $("#txtEmail").val(),
+            txtPwd: $("#txtPwd").val(),
+            Combo: $("#Combo").val()
+          }
+        }
+        $.ajax(ConfiObj).done(function (response) {
+          alert(response);
+          // $("#errSignup").html(response);
+
+        }).fail(function (err) {
+          alert(err.statusText);
+        })
+
+      })
+
+      $("#btnLogin").click(function () {
+
+        //alert();
+
+        let obj = {
+          type: "get",
+          url: "/login-process",
+          data: {
+            txtEmaiil: $("#txtEmaiil").val(),
+            txtPwwd: $("#txtPwwd").val()
+          }
+        }
+
+        $.ajax(obj).done(function (response) {
+          alert(response);
+          if (response == "Influencer") {
+
+            location.href = "infl-dash.html";
+            localStorage.setItem("activeuser", $("#txtEmaiil").val());
+          }
+
+          else if (response == "Collaborator") {
+            location.href = "client-dash.html";
+            localStorage.setItem("activeuser", $("#txtEmaiil").val());
+          }
+
+          else
+            alert();
+
+        }).fail(function (err) {
+          alert(err.statusText);
+        })
+
+      })
+
+      $("#btnforgetpass").click(function () {
+        alert();
+        let ConfiObj = {
+          type: "get",
+          url: "/forget-password",
+          data: {
+            txtEmaiil: $("#txtEmaiil").val()
+          }
+        }
+        $.ajax(ConfiObj).done(function (response) {
+          //alert(response);
+          // $("#errSignup").html(response);
+
+        }).fail(function (err) {
+          alert(err.statusText);
+        })
+
+      })
+
+    })
+
+
+
+  </script>
+
+
+</head>
+
+<body id="body">
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <div class="container-fluid">
+
+      <a class="navbar-brand" href="#" id="text">
+        <img src="pics/collaborate.jpg" alt="Logo" width="60" height="54" class="d-inline-block align-text-top"
+          id="logo">
+        <div class="text">CONNECTOPIA</div>
+
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        </ul>
+        <form class="d-flex" role="search">
+
+          <button type="button" data-bs-target="#signup" data-bs-toggle="modal"
+            class="btnbtn btn btn-outline-primary">sign up</button>
+
+          <button type="button" data-bs-target="#login" data-bs-toggle="modal"
+            class="btnbtn btn btn-outline-success">login</button>
+
+          <button type="button" class="btnbtn btn btn-outline-warning"><a href="#serviceid"
+              style="text-decoration: none;">
+              services
+            </a></button>
+
+          <button type="button " class="btnbtn btn btn-outline-danger "><a href="#teamid"
+              style="text-decoration: none;">
+              team
+            </a></button>
+
+          <button type="button" class="btnbtn btn btn-outline-danger"><a href="#reachid" style="text-decoration: none;">
+              reach us
+            </a></button>
+
+          <button type="submit" data-bs-target="#admin-dash" class="btnbtn btn btn-outline-dark"> <a href="/admin-dash"
+              style="text-decoration: none;">admin-dashboard</a></button>
+
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+  <!-- *********************************************CAROUSEL*****************************************************************************************************88 -->
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+        aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+        aria-label="Slide 4"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
+        aria-label="Slide 5"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5"
+        aria-label="Slide 6"></button>
+    </div>
+
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="1000">
+        <img src="pics/influencer-1.jpg" class="d-block w-100" alt="..." height="500">>
+        <div class="carousel-caption d-none d-md-block">
+        </div>
+      </div>
+
+      <div class="carousel-item" data-bs-interval="1000">
+        <img src="pics/influencer-2.jpg" class="d-block w-100" alt="..." height="500">>
+        <div class="carousel-caption d-none d-md-block">
+        </div>
+      </div>
+
+      <div class="carousel-item" data-bs-interval="1000">
+        <img src="pics/influencer-3.jpg" class="d-block w-100" alt="..." height="500">>
+        <div class="carousel-caption d-none d-md-block">
+        </div>
+      </div>
+
+      <div class="carousel-item" data-bs-interval="1000">
+        <img src="pics/influencer-4.jpg" class="d-block w-100" alt="..." height="500">>
+        <div class="carousel-caption d-none d-md-block">
+        </div>
+      </div>
+
+      <div class="carousel-item" data-bs-interval="1000">
+        <img src="pics/influencer-5.jpg" class="d-block w-100" alt="..." height="500">>
+        <div class="carousel-caption d-none d-md-block">
+        </div>
+      </div>
+
+      <div class="carousel-item" data-bs-interval="1000">
+        <img src="pics/influencer-6.jpg" class="d-block w-100" alt="..." height="500">>
+        <div class="carousel-caption d-none d-md-block">
+        </div>
+      </div>
+
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <!-- ************************************************************************SIGN-UP MODAL***************************************************************************** -->
+
+  <div class="modal" tabindex="-1" id="signup">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <h5 class="modal-title">Sign Up</h5>
+          <!-- <span id="errSignup">*</span> -->
+
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form>
+            <div class="form-group content">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control " id="txtEmail" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="Enter email">
+
+              <span id="spanmail"></span>
+
+            </div>
+            <br>
+            <div class="form-group content">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="txtPwd" id="exampleInputPassword1" placeholder="Password">
+              <span id="spanpass"></span>
+            </div>
+
+            <br>
+            <select class="form-select " aria-label="Default select example" id="Combo">
+              <option selected class="content">User Type</option>
+
+              <option value="Influencer">Influencer</option>
+              <option value="Collaborator">Collaborator</option>
+
+            </select>
+
+            <br>
+            <center>
+              <button type="submit" class="btn btn-primary" id="btnsignup">Sign Up</button>
+            </center>
+
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ************************************************************************LOGIN MODAL***************************************************************************** -->
+  <div class="modal" tabindex="-1" id="login">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <center>
+            <h5 class="modal-title">Login</h5>
+          </center>
+
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form method="post">
+            <div class="form-group content">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" aria-describedby="emailHelp" id="txtEmaiil"
+                placeholder="Enter email">
+              <span id="spanmaiil"></span>
+
+            </div>
+            <br>
+            <div class="form-group content">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="txtPwwd" placeholder="Password">
+              <span id="spanpaass"></span>
+            </div>
+
+            <br>
+
+            <center>
+
+              <button type="button" class="btn btn-primary" id="btnLogin">Login</button>
+            </center>
+            <br>
+            <center>
+              <div class="form-group content">
+                <label for="exampleInputEmail1">Forgot Password?</label>
+
+                <button type="button" class="btn btn-secondary" id="btnforgetpass">Send Mail</button>
+              </div>
+            </center>
+            <br>
+            <center>
+              <div class="content">
+                Don't have an account?
+                <a href="" data-bs-target="#signup" data-bs-toggle="modal" target="_blank">
+                  Sign up
+
+                </a>
+              </div>
+            </center>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- *************************************************************************SERVICES************************************************ -->
+  <div class="row bg-danger text-white fs-3 heading" id="serviceid">
+    <center>SERVICES</center>
+  </div>
+
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+
+      <div class="row">
+
+        <div class="col-md-3">
+          <div class="card h-100">
+
+            <img src="pics/influencer-casting.jpg" class="card-img-top" style="width: 250px; height: 300px;">
+
+            <div class="card-body ">
+
+              <center>
+                <h5 class="card-title content2">Influencer casting</h5>
+              </center>
+              <marquee behavior="" scrollamount="5" direction="up">
+                <p class="card-text content">
+                  There’s never been a bigger need for influencers and content
+                  creators and for that we are tracking down real people that are naturally making their own social
+                  assets
+                  that stand out.We also have the ability to source influencers and content creators in many niche and
+                  alternative geo-markets.We identify andevaluate influencers based on the brief so that the clients can
+                  collaborate with them
+                </p>
+              </marquee>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="col-md-3">
+          <div class="card h-100">
+
+            <img src="pics/marketing.jpg " class="card-img-top" alt="..." style="width: 270px; height: 300px;">
+            <div class="card-body">
+              <center>
+                <h5 class="card-title content2">Affiliate marketing</h5>
+              </center>
+              <marquee behavior="" scrollamount="5" direction="up">
+                <p class="card-text content">Affiliate marketing is typically done through social media engagement that
+                  promotes
+                  a particular product or service and relies heavily on social media
+                  platforms like Instagram, YouTube, and Snapchat to reach a wider audience. We research, identify and
+                  evaluate influencers based on brief and optimise and promote campaigns on multiple platforms for
+                  better engagement like instagram etc.
+                </p>
+              </marquee>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+          <div class="card h-100">
+            <img src="pics/collaboration.jpg" class="card-img-top" alt="..." style="width: 280px; height: 300px;">
+            <div class="card-body">
+              <center>
+                <h5 class="card-title content2">Collaborations</h5>
+              </center>
+              <marquee behavior="" scrollamount="5" direction="up">
+                <p class="card-text content">Finding relevant collaboration for your brand is a part of a successful
+                  influencer
+                  marketing strategy. Collaborative posts typically involve influencers creating sponsored content
+                  featuring your brand's products or services seamlessly in various forms, including product reviews or
+                  sponsored giveaways. Clients hire and collaborate with influencers and optimise campaigns on
+                  multiple platforms.
+
+                </p>
+              </marquee>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-3">
+          <div class="card h-100">
+
+
+            <img src="pics/management.jpg" class="card-img-top" style="width: 285px; height: 300px;">
+            <div class="card-body ">
+              <center>
+                <h5 class="card-title content2 ">Influencer management</h5>
+              </center>
+              <marquee behavior="" scrollamount="5" direction="up">
+                <p class="card-text content">Influencer management is handling influencer-based
+                  marketing strategies which are created with the aim of guaranteeing that any partnered influencers
+                  consistently
+                  put out high-quality content that furthers your company’s goals along with balancing the needs of the
+                  influencers.
+                  We ensure regularly communicating with influencers to ensure everything is progressing as it should.
+                </p>
+              </marquee>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- *************************************************************************TEAM************************************************ -->
+  <div class="row bg-danger text-white fs-3 heading" id="teamid">
+    <center>TEAM</center>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-10 offset-md-1">
+
+      <div class="row">
+        <div class="card mb-3" style="max-width: 540px; margin: 10px; margin-left: 50px;">
+          <div class="row g-0">
+            <div class="col-md-4 ">
+              <img src="pics/sir-2.jpeg" class="img-fluid rounded-start">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body" style="padding: 80px; color: #C2705F; background-color: antiquewhite;">
+                <center>
+                  <h5 class=" card-title">Rajesh Bansal</h5>
+                  <p>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">Mentor</h6>
+                  </p>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">Author of Real Java</h6>
+                </center>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-3" style="max-width: 540px; margin: 10px; margin-left: 50px;">
+          <div class="row g-0">
+            <div class="col-md-4 ">
+              <img src="pics/angelina.jpg" class="img-fluid rounded-start" style="height:250px; width: 600;">
+            </div>
+            <div class="col-md-8 content">
+              <div class="card-body" style="padding: 80px; color: #C2705F; background-color: antiquewhite;">
+                <center>
+                  <h5 class="card-title ">Angelina</h5>
+                  <p>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">Developer</h6>
+                  </p>
+                  <h6 class="card-subtitle mb-2 text-body-secondary" style="color: #C2705F;">Student</h6>
+                </center>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- *************************************************************************ADDRESS************************************************ -->
+  <div class="row bg-danger text-white fs-3 heading" id="reachid">
+    <center>REACH US</center>
+  </div>
+  <center><iframe
+      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13712.825008322892!2d76.5753719!3d30.7687902!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ffb140bd63e07%3A0x68591e334d17a988!2sChandigarh%20University!5e0!3m2!1sen!2sin!4v1721674564102!5m2!1sen!2sin"
+      width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe></center>
+
+  <!-- ******************************************************************************************************* -->
+  <div class="row">
+  </div>
+
+  <div class="row">
+    <div class="col content" style="background-color: antiquewhite; ">
+
+      <div style="font-size: larger;">Visit Again! </div><br>
+      Copyright © 2024- ANGELINA <br>
+      CHANDIGARH UNIVERSITY <br>
+      GHARUAN,PUNJAB <br>
+      23BCS10125@cuchd.in
+    </div>
+  </div>
+</body>

@@ -1,0 +1,121 @@
+<html>
+
+<head>
+    <title>
+        admin dashboard
+    </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <style>
+        #logo {
+
+            height: 70px;
+            width: 70px;
+            background-size: contain;
+            margin-top: 5px;
+            /* logo takes margin from outer div */
+            float: left;
+            margin-left: 10px;
+            border-radius: 30%;
+
+        }
+
+        .text {
+            margin-top: 10px;
+            float: left;
+            margin-left: 20px;
+            font-size: 30px;
+            color: #BD3F23;
+            text-shadow: -7px 5px 2px #DD7F6A;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+        }
+
+        #body {
+            background-color: #EF8F7A
+        }
+
+        .btn,
+        .btn:hover,
+        .btn:active,
+        .btn:visited {
+            background-color: #C2705F !important;
+            color: white;
+        }
+    </style>
+</head>
+
+<body id="body">
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="#" id="text">
+                <img src="pics/collaborate.jpg" alt="Logo" width="60" height="54" class="d-inline-block align-text-top"
+                    id="logo">
+                <div class="text">CONNECTOPIA</div>
+
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <br><br><br><br><br>
+    <div class="row bg-danger text-white fs-3" id="reachid">
+        <center>ADMIN DASHBOARD <br>
+            <span id="spanid"></span>
+        </center>
+
+    </div>
+
+    <div class="row" style="margin-top: 20px;">
+
+        <div class="col-md-10 offset-md-3">
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="pics/user-manager.jpg" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <center>
+                                <a href="/admin-users" class="btn ">User Manager</a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="pics/user-console.jpg" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <center>
+                                <a href="/admin-all-influ" class="btn ">Influencer
+                                    Console</a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

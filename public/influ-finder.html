@@ -1,0 +1,368 @@
+<html>
+
+<head>
+    <title>
+        influencer-finder
+    </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+    <script>
+        var module = angular.module("myKuchModule", []);
+
+        var controller = module.controller("myKuchController", function ($scope, $http) {
+
+            $scope.jsonArrayCity;
+            $scope.jsonArrayCards;
+            $scope.jsonArrayName;
+
+            $scope.doShowSel = function () {
+
+                // alert($scope.selContent);
+                let content = $scope.content;
+                let url = "/fetch-city?content=" + content;
+
+                $http.get(url).then(allIsWell, notWell);
+
+                function allIsWell(response) {
+                    // alert(JSON.stringify(response.data));
+                    $scope.jsonArrayCity = response.data;
+
+                }
+                function notWell(err) {
+                    alert(err)
+                }
+            }
+
+            $scope.doShowCard = function () {
+                let content = $scope.content;
+                let city = $scope.city;
+                let url = "/show-cards?city=" + city + "&content=" + content;
+
+                $http.get(url).then(allIsWell, notWell);
+
+                function allIsWell(response) {
+                    //alert(JSON.stringify(response.data));
+                    $scope.jsonArrayName = response.data;
+                }
+                function notWell(err) {
+                    alert(err)
+                }
+            }
+
+            $scope.doFindbyName = function () {
+                let name = $scope.name;
+                let url = "/show-name?name=" + name;
+
+                $http.get(url).then(allIsWell, notWell);
+
+                function allIsWell(response) {
+                    //alert(JSON.stringify(response.data));
+                    $scope.jsonArrayName = response.data;
+
+                }
+                function notWell(err) {
+                    alert(err)
+                }
+            }
+
+            $scope.showModal = function (index) {
+                //alert(index);
+
+                $scope.DetailModal = $scope.jsonArrayName[index];
+
+            }
+            $scope.doSendMail = function (email) {
+                active: localStorage.getItem("activeuser")
+
+                let url = "/collaboration-mail?email=" + email;
+
+                $http.get(url).then(allIsWell, notWell);
+
+                function allIsWell(response) {
+                    // alert(JSON.stringify(response.xhrStatus));
+                    alert(JSON.stringify(response.xhrStatus));
+
+                }
+                function notWell(err) {
+                    alert(err)
+                }
+            }
+        });
+    </script>
+
+
+
+    <style>
+        #logo {
+
+            height: 70px;
+            width: 70px;
+            background-size: contain;
+            margin-top: 5px;
+            /* logo takes margin from outer div */
+            float: left;
+            margin-left: 10px;
+            border-radius: 30%;
+
+        }
+
+        .text {
+            margin-top: 10px;
+            float: left;
+            margin-left: 20px;
+            font-size: 30px;
+            color: #BD3F23;
+            text-shadow: -7px 5px 2px #DD7F6A;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+        }
+
+        #body {
+            background-color: #EF8F7A
+        }
+
+        .content {
+
+            color: #BD3F23;
+        }
+
+
+        .btn {
+            background-color: #C2705F !important;
+            color: white;
+        }
+
+        #btn:hover {
+            background-color: #C2705F !important;
+
+        }
+
+        #btn:active {
+            background-color: #C2705F !important;
+
+        }
+
+        #btn :visited {
+            background-color: #C2705F !important;
+
+        }
+
+        .content2 {
+
+            color: #BD3F23;
+
+        }
+
+        .content {
+
+            color: #BD3F23;
+            font-weight: bolder;
+
+        }
+
+        .flex-container {
+            display: flex;
+        }
+
+
+
+        .flex-child-magenta {
+            margin-right: 15px;
+            padding-left: 100px;
+        }
+    </style>
+
+
+</head>
+
+<body ng-app="myKuchModule" ng-controller="myKuchController" id="body">
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="#" id="text">
+                <img src="pics/collaborate.jpg" alt="Logo" width="60" height="54" class="d-inline-block align-text-top"
+                    id="logo">
+                <div class="text">CONNECTOPIA</div>
+
+            </a>
+        </div>
+    </nav>
+    <br><br><br><br><br><br><br>
+    <div class="row">
+        <div class="col-md-10  offset-md-1">
+
+            <div class="row">
+                <div class="col-md-4">
+
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">Name</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-lg" ng-model="name">
+                    </div>
+
+                </div>
+
+                <div class="col">
+                    <button type="button" class="btn" ng-click="doFindbyName();">
+                        Find By Name</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col-md-10  offset-md-1">
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">Content</span>
+                        <select class="form-select" ng-model="content" ng-change="doShowSel();">
+
+                            <option>Choose</option>
+                            <option>Beauty</option>
+                            <option>Education</option>
+                            <option>Food</option>
+                            <option>Lifestyle</option>
+                            <option>Tech</option>
+                            <option>Travel</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">City</span>
+                        <select id="inputContent" class="form-select" name="city" ng-model="city">
+                            <option ng-repeat="obj in jsonArrayCity" value="{{obj.city}}">{{obj.city}}</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <button type="button" class="btn" id="btnFind" ng-click="doShowCard();">
+                        Find Now</button>
+                </div>
+
+                <!-- *************************************************************BY CONTENT&CITY*************************************************************** -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3" ng-repeat="obj in jsonArrayCards">
+                            <div class="card mt-5">
+                                <center> <img src="uploads/{{obj.picpath}}" height="200px" width="200px"></center>
+                                <div class="card-body">
+                                    <h5 class="card-title">Name: {{obj.firstname}} </h5>
+                                    <h5 class="card-title"><a href="{{obj.insta}}">Instagram</a></h5>
+
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#moreinfo">
+                                        More Info
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- **********************************************************BY NAME****************************************************************** -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3" ng-repeat="obj in jsonArrayName">
+                            <div class="card mt-5">
+                                <center> <img src="uploads/{{obj.picpath}}" height="200px" width="200px">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Name:{{obj.firstname}}</h5>
+                                        <h5 class="card-title"><a href="{{obj.insta}}">Instagram</a></h5>
+
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#moreinfo" ng-click="showModal($index);">
+                                            More Information
+                                        </button>
+
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- **************************************************************MODAL****************************************************************************************** -->
+    <div class="modal fade" id="moreinfo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-body" style="background-color: antiquewhite;">
+                    <center> <img src="uploads/{{DetailModal.picpath}}" height="200px" width="200px"
+                            style="border-radius: 50%;"></center>
+                    <br>
+
+                    <div class="flex-container">
+
+
+                        <div class="flex-child-magenta content">
+                            NAME: <br>
+                            GENDER: <br>
+                            DOB:<br>
+                            EMAIL:<br>
+                            PHONE:<br>
+                            CITY:<br>
+                            STATE: <br>
+                            TO COLLABORATE:
+
+                        </div>
+
+                        <div class="flex-child green content2">
+                            {{DetailModal.firstname }} {{DetailModal.lastname }}<br>
+                            {{DetailModal.gender }}<br>
+                            {{DetailModal.dob }}<br>
+                            {{DetailModal.email }}<br>
+                            {{DetailModal.contact }}<br>
+                            {{DetailModal.city }}<br>
+                            {{DetailModal.state}} <br>
+                            <button type="button" class="btn" id="btnSendMail"
+                                ng-click="doSendMail(DetailModal.email);">Send Mail</button>
+
+                        </div>
+
+                    </div>
+                    <br><br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>

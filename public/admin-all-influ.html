@@ -1,0 +1,181 @@
+<html>
+
+<head>
+    <title>
+        Users
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+    <script>
+        var module = angular.module("myModule", []);
+
+        var controller = module.controller("myController", function ($scope, $http) {
+
+            $scope.jsonArrayAll;
+
+            $scope.getAll = function () {
+                let url = "/fetch-profile";
+                $http.get(url).then(allIsWell, notWell);
+
+                function allIsWell(response) {
+                    //alert(JSON.stringify(response.data));
+                    $scope.jsonArrayAll = response.data;
+
+                }
+                function notWell(err) {
+                    alert(err)
+                }
+            }
+        });
+    </script>
+    <style>
+        #logo {
+
+            height: 70px;
+            width: 70px;
+            background-size: contain;
+            margin-top: 5px;
+            /* logo takes margin from outer div */
+            float: left;
+            margin-left: 10px;
+            border-radius: 30%;
+
+        }
+
+        .text {
+            margin-top: 10px;
+            float: left;
+            margin-left: 20px;
+            font-size: 30px;
+            color: #BD3F23;
+            text-shadow: -7px 5px 2px #DD7F6A;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+        }
+
+        #body {
+            background-color: #EF8F7A ;
+
+        }
+    </style>
+</head>
+
+<body ng-app="myModule" ng-controller="myController" ng-init="getAll();" id="body">
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="#" id="text">
+                <img src="pics/collaborate.jpg" alt="Logo" width="60" height="54" class="d-inline-block align-text-top"
+                    id="logo">
+                <div class="text">CONNECTOPIA</div>
+
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <br><br><br><br>
+    <center>
+        <div style="margin: 10px;">
+
+            <table border="2" width="600" cellpadding="10" cellspacing="10" rules="all">
+                <tr>
+                    <th>Sr.No</th>
+                    <th>Email ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Gender</th>
+                    <th>Address</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>ZIP</th>
+                    <th>Content</th>
+                    <th>Instagram</th>
+                    <th>Facebook</th>
+                    <th>X</th>
+                    <th>Snapchat</th>
+                    <th>Contact</th>
+                    <th>Other</th>
+                    <th>Picpath</th>
+                    <th>Dob</th>
+                </tr>
+                <tr ng-repeat="obj in jsonArrayAll">
+                    <td>{{$index+1}}</td>
+                    <td>
+                        {{obj.email}}
+                    </td>
+                    <td>
+                        {{obj.firstname}}
+                    </td>
+                    <td>
+                        {{obj.lastname}}
+                    </td>
+                    <td>
+                        {{obj.gender}}
+                    </td>
+                    <td>
+                        {{obj.address}}
+                    </td>
+                    <td>
+                        {{obj.state}}
+                    </td>
+                    <td>
+                        {{obj.city}}
+                    </td>
+                    <td>
+                        {{obj.zip}}
+                    </td>
+                    <td>
+                        {{obj.content}}
+                    </td>
+                    <td>
+                        {{obj.insta}}
+                    </td>
+                    <td>
+                        {{obj.fb}}
+                    </td>
+                    <td>
+                        {{obj.X}}
+                    </td>
+                    <td>
+                        {{obj.snapchat}}
+                    </td>
+                    <td>
+                        {{obj.contact}}
+                    </td>
+                    <td>
+                        {{obj.other}}
+                    </td>
+                    <td>
+                        {{obj.picpath}}
+                        <br>
+                        <img src="uploads/{{obj.picpath}}" width="50" height="50">
+                    </td>
+                    <td>
+                        {{obj.dob}}
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </center>
+
+</body>
+
+</html>

@@ -1,0 +1,355 @@
+<html>
+
+<head>
+    <title>
+        influencer dashboard
+    </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script>
+        function doLogOut() {
+
+            localStorage.removeItem("activeuser");
+            location.href = "index.html";
+        }
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            //     if(localStorage.getItem("activeuser")!=null)
+            // {
+            //     location.href = "index.html";
+            //     return;
+            // }
+
+            let active = localStorage.getItem("activeuser");
+            //alert(active);
+            $("#spanid").html("Welcome:" + active);
+            $("#txtEmail").val(active).prop("readonly", true);
+            $("#chemail").val(active).prop("readonly", true);
+
+            $("#btnEvent").click(function () {
+                // alert();
+                let ConfiObj = {
+                    type: "get",
+                    url: "/save-bookings",
+                    data: {
+
+                        txtEmail: $("#txtEmail").val(),
+                        txtEvent: $("#txtEvent").val(),
+                        txtCity: $("#txtCity").val(),
+                        txtVenue: $("#txtVenue").val(),
+                        txtDate: $("#txtDate").val(),
+                        txtTime: $("#txtTime").val()
+
+                    }
+                }
+                $.ajax(ConfiObj).done(function (response) {
+                    alert(response);
+
+                }).fail(function (err) {
+                    alert(err.statusText);
+                })
+
+            })
+
+            $("#btnChange").click(function () {
+                // alert();
+                let ConfiObj = {
+                    type: "get",
+                    url: "/change-password",
+                    data: {
+                        chemail: $("#chemail").val(),
+                        opwd: $("#opwd").val(),
+                        npwd: $("#npwd").val(),
+                        nnpwd: $("#nnpwd").val()
+
+                    }
+                }
+                $.ajax(ConfiObj).done(function (response) {
+                    alert(response);
+
+                }).fail(function (err) {
+                    alert(err.statusText);
+                })
+
+            })
+
+
+        })
+
+    </script>
+
+    <style>
+        #logo {
+
+            height: 70px;
+            width: 70px;
+            background-size: contain;
+            margin-top: 5px;
+            /* logo takes margin from outer div */
+            float: left;
+            margin-left: 10px;
+            border-radius: 30%;
+
+        }
+
+        .text {
+            margin-top: 10px;
+            float: left;
+            margin-left: 20px;
+            font-size: 30px;
+            color: #BD3F23;
+            text-shadow: -7px 5px 2px #DD7F6A;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+        }
+
+        #body {
+            background-color: #EF8F7A
+        }
+
+        .content {
+
+            color: #BD3F23;
+        }
+
+        .modal-header {
+            background-color: #C2705F;
+            color: white;
+        }
+        .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #C2705F !important;
+}
+    </style>
+
+</head>
+
+<body id="body">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="#" id="text">
+                <img src="pics/collaborate.jpg" alt="Logo" width="60" height="54" class="d-inline-block align-text-top"
+                    id="logo">
+                <div class="text">CONNECTOPIA</div>
+
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <br><br><br><br><br>
+
+    <div class="row bg-danger text-white fs-3" id="reachid">
+        <center>INFLUENCER DASHBOARD <br>
+            <span id="spanid"></span>
+        </center>
+
+    </div>
+    <div class="row">
+
+        <div class="col-md-10 offset-md-2">
+
+            <div class="row">
+
+                <div class="col-md-2">
+                    <div class="card">
+                        <img src="pics/man-red-shirt-with-white-collar.png " class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <center>
+                                <a href="/infl-profile" class="btn btn-primary">Profile</a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="card">
+                        <img src="pics/man-doing-appointment-booking-with-smartphone.png" class="card-img-top"
+                            alt="..." />
+                        <div class="card-body">
+                            <center>
+                                <a href="#" class="btn btn-primary" data-bs-target="#bookings"
+                                    data-bs-toggle="modal">Bookings</a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="card">
+                        <img src="pics/event-manager.jpg" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <center>
+                                <a href="/event-manager" class="btn btn-primary">Event Manager</a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="card">
+                        <img src="pics/illustration-cogwheel.png" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <center>
+                                <a href="#" class="btn btn-primary" data-bs-target="#settings"
+                                    data-bs-toggle="modal">Settings</a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="card">
+                        <img src="pics/logout.webp" class="card-img-top" alt="..." style="height:190px">
+                        <div class="card-body">
+                            <center>
+                                <a href="#" class="btn btn-primary" data-bs-target="#settings" data-bs-toggle="modal"
+                                    id="logoutid" onclick="doLogOut();">Log Out</a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    <!-- ********************************************************************BOOKINGS***************************************************************** -->
+
+    <div class="modal" tabindex="-1" role="dialog" id="bookings">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Events</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="container">
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group content">
+                                <label for="inputAddress">Email</label> <br>
+                                <input type="text" class="form-control" id="txtEmail" placeholder="Email">
+                            </div>
+                            <br>
+
+                            <div class="form-group content">
+                                <label for="inputAddress">Event</label> <br>
+                                <input type="text" class="form-control" id="txtEvent" placeholder="Event">
+                            </div>
+                            <br>
+
+                            <div class="form-row ">
+
+                                <div class="form-group col-md-5 content " style="float: left;">
+                                    <label for="inputPassword4">Date</label> <br>
+                                    <input type="date" class="form-control" id="txtDate">
+                                </div>
+
+
+                                <div class="form-group col-md-5 offset-md-1  content" style="float: left;">
+                                    <label for="inputEmail4">Time</label> <br>
+                                    <input type="time" class="form-control" id="txtTime">
+                                </div>
+                            </div>
+
+                            <br><br><br>
+
+                            <div class="form-row ">
+
+                                <div class="form-group col-md-4  content " style="float: left;">
+                                    <label for="inputPassword4">City</label> <br>
+                                    <input type="text" class="form-control" id="txtCity" placeholder="City">
+                                </div>
+
+                                <div class="form-group col-sm-7 offset-md-1   content" style="float: left;">
+                                    <label for="inputEmail4">Venue</label> <br>
+                                    <input type="text" class="form-control" id="txtVenue" placeholder="Venue">
+                                </div>
+
+                            </div>
+                            <br><br>
+
+                        </form>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" id="btnEvent" style="float: left;">Post Event</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- ********************************************************************SETTINGS***************************************************************** -->
+    <div class="modal" tabindex="-1" role="dialog" id="settings">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body content">
+                    <form>
+                        <div class="form-group">
+                            <label for="inputAddress">Email</label>
+                            <input type="text" class="form-control" id="chemail" placeholder="Email">
+                        </div>
+
+                        <br>
+                        <div class="form-group">
+                            <label for="inputAddress">Old Password</label>
+                            <input type="password" class="form-control" id="opwd" placeholder="Old Password">
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="inputAddress">New Password</label>
+                            <input type="password" class="form-control" id="npwd" placeholder="New Password">
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="inputAddress">Enter Password Again</label>
+                            <input type="password" class="form-control" id="nnpwd" placeholder="Enter Password Again">
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <center>
+                        <button type="button" class="btn btn-primary" id="btnChange">Change Password</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </center>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
