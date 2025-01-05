@@ -26,7 +26,7 @@ Connectopia is an innovative platform that bridges the gap between social media 
 
 ### 3. **Client Profile Management**
    - **Create/Update Client Profile**: Brands and collaborators can create and modify their profiles.
-   - **Search Client Profiles**: Users can search for brands or clients by email.
+   - **Search Client Profiles**: Users can search for brands or clients by name and city.
 
 ### 4. **Event Management**
    - **Book Events**: Influencers can book events with details like venue, time, date, etc.
