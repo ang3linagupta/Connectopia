@@ -34,7 +34,6 @@ Connectopia is an innovative platform that bridges the gap between social media 
 
 ### 5. **Collaboration Requests**
    - **Collaborate with Influencers**: Brands or collaborators can send collaboration requests to influencers via email.
-   - **Accept or Reject**: Influencers can accept or reject collaboration requests.
 
 ### 6. **Admin Dashboard**
    - **User Management**: Admins can view all users and manage them by activating, blocking, or deleting their accounts.
