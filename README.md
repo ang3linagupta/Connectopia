@@ -22,12 +22,11 @@ Connectopia is an innovative platform that bridges the gap between social media 
 ### 2. **Influencer Profile Management**
    - **Create/Update Profile**: Influencers can create and update their profiles with information such as name, bio, social media links, and a profile picture.
    - **Upload and Update Profile Pictures**: Influencers can upload a profile picture during registration or update it later.
-   - **Search and View Profiles**: Admins can view and manage influencer profiles.
+   - **Search and View Profiles**: Users can search and view for influencers by name and city.
 
 ### 3. **Client Profile Management**
    - **Create/Update Client Profile**: Brands and collaborators can create and modify their profiles.
-   - **Search Client Profiles**: Users can search for brands or clients by name and city.
-
+     
 ### 4. **Event Management**
    - **Book Events**: Influencers can book events with details like venue, time, date, etc.
    - **Manage Events**: Users can view, update, or delete events.
