@@ -28,8 +28,8 @@ Connectopia is an innovative platform that bridges the gap between social media 
    - **Create/Update Client Profile**: Brands and collaborators can create and modify their profiles.
      
 ### 4. **Event Management**
-   - **Book Events**: Influencers can book events with details like venue, time, date, etc.
-   - **Manage Events**: Users can view, update, or delete events.
+   - **Book Events**: Influencers can book events with details like venue, time, date, etc. and can update them.
+   - **Manage Events**: Users can browse and view the evnt details like venue, time, date, etc.
 
 ### 5. **Collaboration Requests**
    - **Collaborate with Influencers**: Brands or collaborators can send collaboration requests to influencers via email.
@@ -37,8 +37,7 @@ Connectopia is an innovative platform that bridges the gap between social media 
 ### 6. **Admin Dashboard**
    - **User Management**: Admins can view all users and manage them by activating, blocking, or deleting their accounts.
    - **Influencer Management**: Admins can view all influencer profiles and manage them.
-   - **Event Management**: Admins can manage events across the platform.
-
+   
 ### 7. **Email Notifications**
    - **Password Recovery**: Send the user their existing password via email.
    - **Collaboration Request**: Sends an email to influencers when a brand or collaborator sends a request for collaboration.
